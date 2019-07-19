@@ -1,6 +1,13 @@
+import { FETCHING, LOGIN_SUCCESS, GET_SUCCESS, LG_ERRORS } from '../actions';
 /*
   Be sure to import in all of the action types from `../actions`
 */
+
+const initialState = {
+  smurfs: [],
+  isFetching: false,
+  errorMessage: null
+};
 
 /*
  Your initial/default state for this project could *Although does not have to* look a lot like this

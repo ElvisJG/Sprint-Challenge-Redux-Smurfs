@@ -1,7 +1,14 @@
+import axios from 'axios';
+import axiosAuth from '../axiosAuth';
+
 /* 
   Action Types Go Here!
   Be sure to export each action type so you can pull it into your reducer
 */
+export const FETCHING = 'FETCHING';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const GET_SUCCESS = 'GET_SUCCESS';
+export const LG_ERRORS = 'LG_ERRORS';
 
 /*
   For this project you'll need at least 2 action creators for the main portion,
