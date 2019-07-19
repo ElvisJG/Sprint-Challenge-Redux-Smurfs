@@ -8,6 +8,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import smurfsReducer from /* You need some sort of reducer */ './reducers';
 import useToken from './useToken';
+import { browserRouter } from 'react-router-dom';
 
 const store = createStore(
   smurfsReducer,

@@ -1,10 +1,14 @@
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const port = 3333;
+const token =
+  'esfeyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NUIhkufemQifQ';
 
 const server = express();
 server.use(express.json());
 server.use(cors());
+server.use(bodyParser.json());
 
 const sendUserError = (msg, res) => {
   res.status(422);
@@ -25,7 +29,30 @@ server.get('/smurfs', (req, res) => {
 });
 let smurfId = smurfs.length;
 
-server.post('/smurfs', (req, res) => {
+function authenticator(req, res, next) {
+  const { authorization } = req.headers;
+  if (authorization === token) {
+    next();
+  } else {
+    res.status(403).json({ error: 'User be logged in to do that.' });
+  }
+}
+
+server.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  if (username === 'Papa Smurf' && password === 'smurfking') {
+    req.loggedIn = true;
+    res.status(200).json({
+      payload: token
+    });
+  } else {
+    res
+      .status(403)
+      .json({ error: 'Username or Password incorrect. Please see Readme' });
+  }
+});
+
+server.post('/smurfs', authenticator, (req, res) => {
   const { name, age, height } = req.body;
   const newSmurf = { name, age, height, id: smurfId };
   if (!name || !age || !height) {
@@ -49,7 +76,7 @@ server.post('/smurfs', (req, res) => {
   res.json(smurfs);
 });
 
-server.put('/smurfs/:id', (req, res) => {
+server.put('/smurfs/:id', authenticator, (req, res) => {
   const { id } = req.params;
   const { name, age, height } = req.body;
   const findSmurfById = smurf => {
@@ -66,7 +93,7 @@ server.put('/smurfs/:id', (req, res) => {
   }
 });
 
-server.delete('/smurfs/:id', (req, res) => {
+server.delete('/smurfs/:id', authenticator, (req, res) => {
   const { id } = req.params;
   const foundSmurf = smurfs.find(smurf => smurf.id == id);
 
