@@ -21,6 +21,19 @@ const initialState = {
  }
 */
 
+export default function smurfsReducer(state = initialState, action) {
+  switch (action.type) {
+    case FETCHING:
+      return {
+        ...state,
+        isFetching: true,
+        errorMessage: null
+      };
+    default:
+      return state;
+  }
+}
+
 /*
   You'll only need one smurf reducer for this project.
   Feel free to export it as a default and import as rootReducer. 
