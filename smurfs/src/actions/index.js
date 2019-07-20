@@ -1,5 +1,5 @@
 import axios from 'axios';
-import axiosAuth from '../axiosAuth';
+import useAuth from '../useAuth';
 
 /* 
   Action Types Go Here!
@@ -27,7 +27,7 @@ export function login(username, password) {
   return dispatch => {
     dispatch({ type: FETCHING });
 
-    return axiosAuth()
+    return useAuth()
       .post('http://localhost:/3333/login', { username, password })
       .then(res => {
         dispatch({ type: LOGIN_SUCCESS, payload: { token: res.data.payload } });
