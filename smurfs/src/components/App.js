@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
-import PrivateRoute from './PrivateRoute';
+// import PrivateRoute from './PrivateRoute';
 import Dashboard from './Dashboard';
-import Login from './Login';
+// import Login from './Login';
 /*
  to wire this component up you're going to need a few things.
  I'll let you do this part on your own. 
@@ -13,8 +13,8 @@ import Login from './Login';
 function App() {
   return (
     <div className='App'>
-      <PrivateRoute exact path='/' component={Dashboard} />
-      <Route exact path='/login' component={Login} />
+      <Route exact path='/' component={Dashboard} />
+      {/* <Route exact path='/login' component={Login} /> */}
     </div>
   );
 }

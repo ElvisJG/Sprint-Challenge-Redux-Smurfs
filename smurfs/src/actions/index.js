@@ -9,6 +9,7 @@ export const FETCHING = 'FETCHING';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const GET_SUCCESS = 'GET_SUCCESS';
 export const LG_ERRORS = 'LG_ERRORS';
+export const ADDING_SMURF = 'ADDING_SMURF';
 
 /*
   For this project you'll need at least 2 action creators for the main portion,
@@ -35,3 +36,33 @@ export function login(username, password) {
       });
   };
 }
+
+export const fetchSmurfs = () => {
+  return dispatch => {
+    dispatch({ type: FETCHING });
+
+    axios
+      .get('http://localhost:3333/smurfs')
+      .then(res => {
+        dispatch({ type: GET_SUCCESS, payload: res.data });
+      })
+      .catch(err => {
+        dispatch({ type: LG_ERRORS, payload: err });
+      });
+  };
+};
+
+export const addSmurf = newSmurf => {
+  return dispatch => {
+    dispatch({ type: ADDING_SMURF });
+
+    axios
+      .post('http://localhost:3333/smurfs', newSmurf)
+      .then(res => {
+        dispatch({ type: GET_SUCCESS, payload: res.data });
+      })
+      .catch(err => {
+        dispatch({ type: LG_ERRORS, payload: err });
+      });
+  };
+};

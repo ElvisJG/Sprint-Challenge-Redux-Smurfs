@@ -1,4 +1,10 @@
-import { FETCHING, LOGIN_SUCCESS, GET_SUCCESS, LG_ERRORS } from '../actions';
+import {
+  FETCHING,
+  LOGIN_SUCCESS,
+  GET_SUCCESS,
+  LG_ERRORS,
+  ADDING_SMURF
+} from '../actions';
 import Login from '../components/Login';
 /*
   Be sure to import in all of the action types from `../actions`
@@ -7,7 +13,8 @@ import Login from '../components/Login';
 const initialState = {
   smurfs: [],
   fetching: false,
-  errorMessage: null
+  errorMessage: null,
+  deletingSmurf: null
 };
 
 /*
@@ -29,6 +36,26 @@ export default function smurfsReducer(state = initialState, action) {
         ...state,
         fetching: true,
         errorMessage: null
+      };
+    case GET_SUCCESS:
+      return {
+        ...state,
+        fetching: false,
+        errorMessage: null,
+        smurfs: action.payload
+      };
+    case ADDING_SMURF:
+      return {
+        ...state,
+        fetching: false,
+        errorMessage: null,
+        smurfs: action.payload
+      };
+    case LG_ERRORS:
+      return {
+        ...state,
+        fetching: false,
+        errorMessage: action.payload
       };
     default:
       return state;
