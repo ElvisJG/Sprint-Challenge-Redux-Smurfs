@@ -3,7 +3,8 @@ import {
   LOGIN_SUCCESS,
   GET_SUCCESS,
   LG_ERRORS,
-  ADDING_SMURF
+  ADDING_SMURF,
+  ADD_SMURF
 } from '../actions';
 import Login from '../components/Login';
 /*
@@ -14,7 +15,8 @@ const initialState = {
   smurfs: [],
   fetching: false,
   errorMessage: null,
-  deletingSmurf: null
+  deletingSmurf: null,
+  creatingSmurf: null
 };
 
 /*
@@ -47,9 +49,13 @@ export default function smurfsReducer(state = initialState, action) {
     case ADDING_SMURF:
       return {
         ...state,
-        fetching: false,
-        errorMessage: null,
-        smurfs: action.payload
+        creatingSmurf: true
+      };
+    case ADD_SMURF:
+      return {
+        ...state,
+        smurfs: action.payload,
+        creatingSmurf: false
       };
     case LG_ERRORS:
       return {

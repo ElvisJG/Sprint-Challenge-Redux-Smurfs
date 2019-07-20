@@ -10,6 +10,7 @@ export default class Smurfs extends Component {
         {this.props.smurfs.map(smurf => {
           return <Smurf key={smurf.id} smurf={smurf} />;
         })}
+        <SmurfForm />
       </ul>
     );
   }
