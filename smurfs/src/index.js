@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './components/App';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import { createStore, applyMiddleware, compose } from 'redux';
-import { Provider } from 'react-redux';
+
+import './index.css';
+import App from './components/App';
 import smurfsReducer from /* You need some sort of reducer */ './reducers';
 import useToken from './useToken';
-import { browserRouter } from 'react-router-dom';
 
 const store = createStore(
   smurfsReducer,
@@ -22,7 +23,9 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );

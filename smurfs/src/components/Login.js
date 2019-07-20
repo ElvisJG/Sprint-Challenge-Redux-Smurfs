@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login } from '../actions/friendsActions';
+import { login } from '../actions/';
 
 class Login extends Component {
   constructor() {
@@ -36,10 +36,10 @@ class Login extends Component {
 
   render() {
     const { username, password } = this.state;
-    const { loggingIn, error } = this.props;
+    const { fetching, errorMessage } = this.props;
     return (
       <form onSubmit={this.handleSubmit} className='login-form'>
-        {error && <p className='error'>{error}</p>}
+        {errorMessage && <p className='error'>{errorMessage}</p>}
         <input
           type='text'
           name='username'
@@ -54,19 +54,15 @@ class Login extends Component {
           value={password}
           onChange={this.handleChange}
         />
-        {loggingIn ? (
-          <p>Logging in...</p>
-        ) : (
-          <button type='submit'>Login</button>
-        )}
+        {fetching ? <p>Logging in...</p> : <button type='submit'>Login</button>}
       </form>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  loggingIn: state.loggingIn,
-  error: state.error
+  fetching: state.fetching,
+  errorMessage: state.errorMessage
 });
 
 const mapDispatchToProps = {

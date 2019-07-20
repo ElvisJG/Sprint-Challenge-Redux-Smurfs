@@ -20,3 +20,18 @@ export const LG_ERRORS = 'LG_ERRORS';
    U - updateSmurf
    D - deleteSmurf
 */
+
+export function login(username, password) {
+  return dispatch => {
+    dispatch({ type: FETCHING });
+
+    return axiosAuth()
+      .post('http://localhost:/3333/login', { username, password })
+      .then(res => {
+        dispatch({ type: LOGIN_SUCCESS, payload: { token: res.data.payload } });
+      })
+      .catch(err => {
+        dispatch({ type: LG_ERRORS, payload: err.response.data });
+      });
+  };
+}

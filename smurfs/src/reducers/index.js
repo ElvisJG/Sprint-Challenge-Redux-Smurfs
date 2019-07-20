@@ -1,11 +1,12 @@
 import { FETCHING, LOGIN_SUCCESS, GET_SUCCESS, LG_ERRORS } from '../actions';
+import Login from '../components/Login';
 /*
   Be sure to import in all of the action types from `../actions`
 */
 
 const initialState = {
   smurfs: [],
-  isFetching: false,
+  fetching: false,
   errorMessage: null
 };
 
@@ -26,7 +27,7 @@ export default function smurfsReducer(state = initialState, action) {
     case FETCHING:
       return {
         ...state,
-        isFetching: true,
+        fetching: true,
         errorMessage: null
       };
     default:
